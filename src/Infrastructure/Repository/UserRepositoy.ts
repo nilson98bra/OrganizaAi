@@ -8,7 +8,7 @@ export class UserRepository implements IUserRepository {
     findUserById(id: string): Promise<User> {
       throw new Error("Method not implemented.");
     }
-    save(user: User): Promise<void> {
+    create(user: User): Promise<void> {
       throw new Error("Method not implemented.");
     }
     update(user: User): Promise<void> {

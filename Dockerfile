@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16-alpine
 
 # Define o diretório de trabalho dentro do contêiner
 WORKDIR /app
@@ -16,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Define o comando para iniciar a aplicação
-CMD ["node", "src/index.js"]
+CMD ["npm", "run","start:dev"]

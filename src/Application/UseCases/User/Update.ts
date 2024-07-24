@@ -1,5 +1,3 @@
-import { Mapper } from "src/Application/Utils/Utils";
-import { UserProps } from "src/Domain/Types/UserProps";
 import { UseCase } from "../UseCase";
 import { UpdateUserDTO } from "./DTO/UpdateUserDTO";
 import { IUserRepository } from "../../Interfaces/Repositories/IUserRepository";
@@ -12,19 +10,15 @@ export class CreateUseCase implements UseCase<UpdateUserDTO ,void>{
     }
     async execute(userChanges: UpdateUserDTO): Promise<void>{
 
-        const userData = Mapper.fromDTO(userChanges, {} as UserProps);
-        const existingUser = await this.userRepository.findUserById(userData.id);
+        const existingUser = await this.userRepository.findUserById(userChanges.id);
         if (!existingUser) {
             throw new Error("Usuário não encontrado!");
         }
-
-        existingUser.Nome = userData.nome;
-        existingUser.Email = userData.email;
-        existingUser.Senha = userData.senha;
+        existingUser.Name = userChanges.name;
+        existingUser.Email = userChanges.email;
+        existingUser.Password = userChanges.password;
         existingUser.validate();
         await this.userRepository.update(existingUser);
-       
-
 
     }
 

@@ -1,9 +1,7 @@
 import { User } from "src/Domain/User";
 import { CreateUserDTO } from "./DTO/CreateUserDTO";
 import { IUserRepository } from "src/Application/Interfaces/Repositories/IUserRepository";
-import { UseCase } from "../usecase";
-import { Mapper } from "src/Application/Utils/Utils";
-import { UserProps } from "src/Domain/Types/UserProps";
+import { UseCase } from "../UseCase";
 
 export class CreateUseCase implements UseCase<CreateUserDTO,void>{
 
@@ -13,12 +11,11 @@ export class CreateUseCase implements UseCase<CreateUserDTO,void>{
     }
     async execute(user: CreateUserDTO): Promise<void>{
 
-        const userData = Mapper.fromDTO(user, {} as UserProps);
-        const newUser = User.create(userData);
+        const newUser = User.create(user);
         const exist = await this.userRepository.verifyUserByEmail(newUser.Email)
         if(exist)
             throw new Error("Usuário já existente");       
-        return await this.userRepository.save(newUser);       
+        return await this.userRepository.create(newUser);       
     }
 
     
