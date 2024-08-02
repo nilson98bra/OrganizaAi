@@ -1,0 +1,49 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id             Int          @id @default(autoincrement())
+  name           String
+  email          String       @unique
+  password       String
+  collaborators  Collaborator[]  // Many-to-many relationship
+}
+
+model Project {
+  id             Int             @id @default(autoincrement())
+  name           String
+  description    String          @unique
+  createdAt      DateTime
+  updatedAt      DateTime
+  deadline       DateTime
+  tasks          Task[]
+  collaborators  Collaborator[]  // Many-to-many relationship
+}
+
+model Task {
+  id             Int      @id @default(autoincrement())
+  name           String   @unique
+  description    String
+  createdAt      DateTime
+  updatedAt      DateTime
+  deadline       DateTime
+  projectId      Int
+  project        Project  @relation(fields: [projectId], references: [id])
+}
+
+model Collaborator {
+  id         Int     @id @default(autoincrement())
+  userId     Int
+  projectId  Int
+  role       String
+  user       User     @relation(fields: [userId], references: [id])
+  project    Project  @relation(fields: [projectId], references: [id])
+
+  @@unique([userId, projectId])
+}

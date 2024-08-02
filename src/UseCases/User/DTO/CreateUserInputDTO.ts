@@ -1,6 +1,6 @@
-export class UpdateUserDTO {
-    readonly id: string
+export type CreateUserInputDTO = {
     readonly name: string;
     readonly email: string;
     readonly password: string;
+  
   }

@@ -15,5 +15,5 @@ COPY . .
 # Expõe a porta em que a aplicação irá rodar
 EXPOSE 3000
 
+CMD ["npm", "run", "start:dev"]
 # Define o comando para iniciar a aplicação
-CMD ["npm", "run","start:dev"]

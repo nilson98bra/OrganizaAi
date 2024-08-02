@@ -1,8 +1,10 @@
+import { Injectable } from "@nestjs/common";
 import { UseCase } from "../UseCase";
-import { UpdateUserDTO } from "./DTO/UpdateUserDTO";
-import { IUserRepository } from "../../Interfaces/Repositories/IUserRepository";
+import { UpdateUserDTO } from "./DTO/UpdateUserInputDTO";
+import { IUserRepository } from "./Repositories/IUserRepository";
 
-export class CreateUseCase implements UseCase<UpdateUserDTO ,void>{
+@Injectable()
+export class UpdateUserUseCase implements UseCase<UpdateUserDTO ,void>{
 
     private readonly userRepository: IUserRepository;
     public constructor(_userRepository: IUserRepository){

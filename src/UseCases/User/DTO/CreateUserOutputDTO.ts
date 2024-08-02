@@ -1,4 +1,4 @@
-export type CreateUserDTO = {
+export type CreateUserOutputDTO = {
     readonly name: string;
     readonly email: string;
     readonly password: string;

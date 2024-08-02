@@ -1,9 +1,9 @@
 import { User } from "src/Domain/User";
-import { CreateUserDTO } from "./DTO/CreateUserDTO";
-import { IUserRepository } from "src/Application/Interfaces/Repositories/IUserRepository";
+import { CreateUserDTO } from "./DTO/CreateUserInputDTO";
+import { IUserRepository } from "src/UseCases/User/Repositories/IUserRepository";
 import { UseCase } from "../UseCase";
 
-export class CreateUseCase implements UseCase<CreateUserDTO,void>{
+export class CreateUserUseCase implements UseCase<CreateUserDTO,void>{
 
     private readonly userRepository: IUserRepository;
     public constructor(_userRepository: IUserRepository){
