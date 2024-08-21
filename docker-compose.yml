@@ -8,8 +8,7 @@ services:
     depends_on:
       - postgres
     environment:
-      - DATABASE_URL=postgres://nilson:123456@postgres:5432/db_organizaai?schema=public
-    command: npm run start:dev
+      - DATABASE_URL=postgres://nilson:123456@postgres:5432/db_organizaai?schema=public&sslmode=disable
 
   postgres:
     image: postgres:13

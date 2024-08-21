@@ -1,25 +1,37 @@
 import { Injectable } from "@nestjs/common";
-import { CreateUserUseCase } from "./CreateUseCase";
-import { UpdateUserUseCase } from "./UpdateUseCase";
-import { CreateUserDTO } from "./DTO/CreateUserInputDTO";
-import { UpdateUserDTO } from "./DTO/UpdateUserInputDTO";
+import { CreateUserInputDTO } from "./DTO/CreateUserInputDTO";
+import { UpdateUserInputDTO } from "./DTO/UpdateUserInputDTO";
+import { ChangePasswordDTO } from "./DTO/ChangePasswordDTO";
+import { CreateUserUseCase, 
+        UpdateUserUseCase, 
+        ChangePasswordUseCase 
+} from "./Index";
 
 @Injectable()
 export class UserService{
     
     constructor(
         private readonly createUserUseCase: CreateUserUseCase,
-        private readonly updateUserUseCase: UpdateUserUseCase
+        private readonly updateUserUseCase: UpdateUserUseCase,
+        private readonly changePasswordUseCase: ChangePasswordUseCase,
+
 
     ){}
       
-    async createUser(createUserValues: CreateUserDTO) {
+    async createUser(createUserValues: CreateUserInputDTO) {
         return this.createUserUseCase.execute(createUserValues);
     }
         
-    async updateUser(updateUserValues: UpdateUserDTO) {
+    async updateUser(updateUserValues: UpdateUserInputDTO) {
         return this.updateUserUseCase.execute(updateUserValues);
     }
+
+    async changePassword(pwChanges: ChangePasswordDTO){
+        return this.changePasswordUseCase.execute(pwChanges)
+    }
+
+
+
     
 }
 

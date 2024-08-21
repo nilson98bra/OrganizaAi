@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Project" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL,
@@ -22,35 +22,47 @@ CREATE TABLE "Project" (
 
 -- CreateTable
 CREATE TABLE "Task" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "deadline" TIMESTAMP(3) NOT NULL,
-    "projectId" INTEGER NOT NULL,
+    "projectId" TEXT NOT NULL,
 
     CONSTRAINT "Task_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Collaborator" (
-    "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "projectId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "projectId" TEXT NOT NULL,
     "role" TEXT NOT NULL,
 
     CONSTRAINT "Collaborator_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Project_id_key" ON "Project"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Project_description_key" ON "Project"("description");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Task_id_key" ON "Task"("id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Task_name_key" ON "Task"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Collaborator_id_key" ON "Collaborator"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Collaborator_userId_projectId_key" ON "Collaborator"("userId", "projectId");

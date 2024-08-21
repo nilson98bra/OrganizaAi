@@ -5,10 +5,11 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 model User {
-  id             Int          @id @default(autoincrement())
+  id             String   @id @default(uuid()) @unique
   name           String
   email          String       @unique
   password       String
@@ -16,7 +17,7 @@ model User {
 }
 
 model Project {
-  id             Int             @id @default(autoincrement())
+  id             String   @id @default(uuid()) @unique
   name           String
   description    String          @unique
   createdAt      DateTime
@@ -27,20 +28,20 @@ model Project {
 }
 
 model Task {
-  id             Int      @id @default(autoincrement())
+  id             String   @id @default(uuid()) @unique
   name           String   @unique
   description    String
   createdAt      DateTime
   updatedAt      DateTime
   deadline       DateTime
-  projectId      Int
+  projectId      String
   project        Project  @relation(fields: [projectId], references: [id])
 }
 
 model Collaborator {
-  id         Int     @id @default(autoincrement())
-  userId     Int
-  projectId  Int
+  id         String     @id @default(uuid()) @unique
+  userId     String
+  projectId  String
   role       String
   user       User     @relation(fields: [userId], references: [id])
   project    Project  @relation(fields: [projectId], references: [id])

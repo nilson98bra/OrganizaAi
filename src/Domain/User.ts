@@ -1,4 +1,4 @@
-
+import { v4 as uuidv4 } from 'uuid';
 type UserProps = {
     name: string;
     email: string;
@@ -10,7 +10,7 @@ export class User{
     private props: Required<UserProps>;
 
     private constructor(props: UserProps, id?: string) {
-        this.id = id || crypto.randomUUID();
+        this.id = id || uuidv4();
         this.props = props;
     }
 
